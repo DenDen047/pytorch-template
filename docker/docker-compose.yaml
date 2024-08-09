@@ -1,0 +1,30 @@
+services:
+  project-core:
+    container_name: project-core
+    deploy:
+      resources:
+        reservations:
+          memory: 8G
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+              device_ids: ['0']
+    image: denden047/project-core
+    build:
+      args:
+        - BASE_IMAGE=nvidia/cuda:12.1.0-devel-ubuntu20.04
+        - PYTHON_VERSION=3.11
+        - FORCE_CUDA=1
+        - UID=1002
+        - GID=1002
+        - USER_NAME=naoya
+        - GROUP_NAME=naoya
+        - TORCH_CUDA_ARCH_LIST=7.5
+      context: ./
+      dockerfile: Dockerfile
+    tty: true
+    volumes:
+      - ../:/home/naoya/project
+      - /data/naoya/:/data/
+    # ports:
+    #   - 8000:8000
