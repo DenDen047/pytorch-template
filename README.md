@@ -7,6 +7,10 @@ $ cd docker && docker-compose up -d
 ```
 
 ```bash
-$ python -m venv venv
+$ python3.10 -m venv venv
 $ source venv/bin/activate
+
+## pip install ...
+
+$ deactivate
 ```
