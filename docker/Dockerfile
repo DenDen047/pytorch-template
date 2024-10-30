@@ -38,7 +38,8 @@ RUN python3 -m pip install --upgrade pip setuptools requests
 # basic libs
 RUN apt install -y build-essential
 RUN python3 -m pip install -U pip
-RUN python3 -m pip install scikit-image matplotlib imageio plotly opencv-python
+RUN python3 -m pip install scikit-image matplotlib imageio opencv-python
+RUN python3 -m pip install plotly pandas
 RUN python3 -m pip install tqdm
 RUN python3 -m pip install loguru
 
