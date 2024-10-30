@@ -40,6 +40,7 @@ RUN apt install -y build-essential
 RUN python3 -m pip install -U pip
 RUN python3 -m pip install scikit-image matplotlib imageio plotly opencv-python
 RUN python3 -m pip install tqdm
+RUN python3 -m pip install loguru
 
 # pytorch
 RUN python3 -m pip install torch torchvision
