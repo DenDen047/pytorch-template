@@ -4,6 +4,7 @@
 
 ```sh
 $ cd docker && docker-compose up -d
+$ docker compose down && docker compose up -d && docker exec -it [container_name] bash
 ```
 
 ```bash
