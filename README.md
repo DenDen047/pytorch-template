@@ -3,8 +3,8 @@
 ## Usage
 
 ```sh
-$ cd docker && docker-compose up -d
-$ docker compose down && docker compose up -d && docker exec -it [container_name] bash
+$ cd docker && docker compose up -d --build
+$ docker compose down && docker compose up -d --build && docker exec -it [container_name] bash
 ```
 
 ```bash
