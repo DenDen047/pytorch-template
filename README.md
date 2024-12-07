@@ -15,3 +15,7 @@ $ source venv/bin/activate
 
 $ deactivate
 ```
+
+## Reference
+
+- [【Pythonの仮想環境を比較】〜オススメを紹介 〜](https://youtu.be/r4SkIhQThe0?si=kziY5m9s05gCk9Hx)
