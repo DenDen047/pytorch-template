@@ -42,6 +42,7 @@ RUN python3 -m pip install scikit-image matplotlib imageio opencv-python
 RUN python3 -m pip install plotly pandas
 RUN python3 -m pip install tqdm
 RUN python3 -m pip install loguru
+RUN python3 -m pip install tensorboard
 
 # pytorch
 RUN python3 -m pip install torch torchvision
