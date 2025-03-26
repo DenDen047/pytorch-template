@@ -38,6 +38,7 @@ RUN python3 -m pip install --upgrade pip setuptools requests
 
 # basic libs
 RUN apt install -y build-essential
+RUN apt install -y ffmpeg
 RUN python3 -m pip install -U pip
 RUN python3 -m pip install scikit-image matplotlib imageio opencv-python
 RUN python3 -m pip install plotly pandas
