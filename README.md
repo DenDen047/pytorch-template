@@ -24,3 +24,4 @@ $ deactivate
 
 - [【Pythonの仮想環境を比較】〜オススメを紹介 〜](https://youtu.be/r4SkIhQThe0?si=kziY5m9s05gCk9Hx)
 - [モダンなPyTorchのテンプレ](https://zenn.dev/dena/articles/6f04641801b387)
+- [timm – PyTorch Image Models](https://huggingface.co/timm)
