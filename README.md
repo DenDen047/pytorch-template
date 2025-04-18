@@ -8,8 +8,8 @@ $ docker compose down && docker compose up -d --build && docker exec -it [contai
 ```
 
 ```bash
-$ pyenv install 3.12
-$ pyenv local 3.12
+$ pyenv install 3.10
+$ pyenv local 3.10
 $ python -m venv .venv
 $ source .venv/bin/activate
 $ pip install -U pip
