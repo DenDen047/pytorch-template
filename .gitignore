@@ -228,5 +228,6 @@ pyrightconfig.json
 # End of https://www.toptal.com/developers/gitignore/api/python,macos,visualstudiocode
 
 .vscode/sftp.json
-data/
-output/
+data/*
+!data/README.md
+output/*
