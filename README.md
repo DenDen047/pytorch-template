@@ -8,6 +8,22 @@ $ docker compose down && docker compose up -d --build && docker exec -it [contai
 ```
 
 ```bash
+$ uv python install 3.12
+
+$ uv python pin 3.12
+$ uv venv .venv
+$ source .venv/bin/activate
+$ uv init
+
+## uv add numpy ...
+
+$ uv lock
+## uv sync    # installs everything into .venv
+$ uv export --format=requirements.txt > requirements.txt
+$ deactivate
+```
+
+```bash
 $ pyenv install 3.10
 $ pyenv local 3.10
 $ python -m venv .venv
