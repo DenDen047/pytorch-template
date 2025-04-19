@@ -1,12 +1,14 @@
 # Pytorch Project Template
 
-## Usage
+## Setup
 
-```sh
+Docker
+```bash
 $ cd docker && docker compose up -d --build
 $ docker compose down && docker compose up -d --build && docker exec -it [container_name] bash
 ```
 
+uv
 ```bash
 $ uv python install 3.12
 
@@ -23,6 +25,7 @@ $ uv export --format=requirements.txt > requirements.txt
 $ deactivate
 ```
 
+venv
 ```bash
 $ pyenv install 3.10
 $ pyenv local 3.10
@@ -35,6 +38,8 @@ $ pip install -U pip
 $ pip freeze > requirements.txt
 $ deactivate
 ```
+
+## Usage
 
 ## Reference
 
