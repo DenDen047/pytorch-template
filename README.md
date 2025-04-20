@@ -18,6 +18,7 @@ $ source .venv/bin/activate
 $ uv init
 
 ## uv add numpy ...
+$ uv add ipykernel  # if JupyterLab is used
 
 $ uv lock
 ## uv sync    # installs everything into .venv
