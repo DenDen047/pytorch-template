@@ -46,7 +46,7 @@ RUN python3 -m pip install tqdm
 RUN python3 -m pip install loguru
 RUN python3 -m pip install tensorboard
 
-# pytorch
+# pytorch (https://pytorch.org/get-started/previous-versions/)
 RUN python3 -m pip install torch torchvision
 
 # Add user. Without this, following process is executed as admin.
