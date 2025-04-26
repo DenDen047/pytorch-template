@@ -42,6 +42,22 @@ $ deactivate
 
 ## Usage
 
+## Data directory
+
+Please see the details [here](https://docs.kedro.org/en/stable/faq/faq.html#what-is-data-engineering-convention).
+
+```bash
+data/
+├── 01_raw/              # Original, immutable data from source systems
+├── 02_intermediate/     # Partially processed (cleaned/transformed) data
+├── 03_primary/          # Canonical datasets for feature engineering
+├── 04_feature/          # Engineered features ready for modeling
+├── 05_model_input/      # Data prepared specifically for model training
+├── 06_models/           # Trained models (e.g., .pkl, .h5 files)
+├── 07_model_output/     # Model outputs like predictions or embeddings
+└── 08_reporting/        # Reports, visualizations, dashboards, final outputs
+```
+
 ## Reference
 
 - [【Pythonの仮想環境を比較】〜オススメを紹介 〜](https://youtu.be/r4SkIhQThe0?si=kziY5m9s05gCk9Hx)
