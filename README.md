@@ -64,3 +64,7 @@ data/
 - [モダンなPyTorchのテンプレ](https://zenn.dev/dena/articles/6f04641801b387)
 - [timm – PyTorch Image Models](https://huggingface.co/timm)
 - [Best Practices for Python Coding](https://cyberagentailab.github.io/BestPracticesForPythonCoding/)
+
+### Sample Projects
+
+- https://github.com/Delgan/loguru
