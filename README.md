@@ -42,6 +42,19 @@ $ deactivate
 
 ## Usage
 
+## Project Configuration
+
+```bash
+.
+├── README.md            # プロジェクト概要と使い方を記述
+├── conf/                # 実験設定ファイル (例: parameters.yml, secrets.yml)
+├── data/                # データや中間成果物の一時保存場所
+├── notebooks/           # JupyterLabでの実験ノート
+├── pyproject.toml       # Pythonプロジェクトの主要設定ファイル (PEP 518準拠)
+├── setup.cfg            # pyproject.toml未対応の設定を補完
+└── src/                 # Pythonパッケージコード (共通処理の関数やクラスなど)
+```
+
 ## Data directory
 
 Please see the details [here](https://docs.kedro.org/en/stable/faq/faq.html#what-is-data-engineering-convention).
