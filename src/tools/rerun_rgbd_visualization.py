@@ -9,13 +9,14 @@ from loguru import logger
 from tqdm import tqdm
 
 
-def visualize_rgb_depth(rgb_image, depth_map, timestamp=None):
+def visualize_rgb_depth(rgb_image, depth_map, focal_length=None, timestamp=None):
     """Visualize RGB and depth images with 3D visualization using Rerun's Pinhole camera model.
 
     Args:
     ----
         rgb_image: RGB image (H, W, 3)
         depth_map: Depth map (H, W)
+        focal_length: Camera focal length in pixel
         frame_name: Name for this frame in Rerun
         timestamp: Optional timestamp in seconds for timeline visualization
 
@@ -30,7 +31,7 @@ def visualize_rgb_depth(rgb_image, depth_map, timestamp=None):
         "world/camera/image",
         rr.Pinhole(
             resolution=[w, h],
-            focal_length=0.7 * w,  # Using the same focal length as the official example
+            focal_length=0.7 * w if focal_length is not None else focal_length,  # Using the same focal length as the official example
         ),
     )
 
