@@ -1,4 +1,4 @@
-# Pytorch Project Template
+# PyTorch-based Project Template
 
 ## Setup
 
@@ -72,6 +72,16 @@ data/
 ```
 
 ## Development
+
+### Git Workflow
+
+This project follows `git-flow`.
+
+1.  **Starting Work:** Begin new development or experiments by creating a branch off of the `develop` branch.
+2.  **Merging to `develop`:** Once work intended for `develop` is complete, merge it into the `develop` branch (creating a Pull Request on GitHub is recommended if applicable) and delete the original branch.
+3.  **Keeping History (Archiving):** If you wish to keep the code and history of a branch *without* merging it into `develop` (e.g., failed experiments, pure explorations), rename the branch to `archive/<original-branch-name>`.
+    * Example: To archive a branch named `exp/try-hyperparams-v1`, rename it to `archive/exp/try-hyperparams-v1`.
+4.  **Archived Branches:** Branches prefixed with `archive/` are kept for reference only and must *not* be merged into active branches like `develop` or `main`.
 
 ### Commit Message
 
