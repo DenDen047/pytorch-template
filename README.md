@@ -71,7 +71,15 @@ data/
 └── 08_reporting/        # Reports, visualizations, dashboards, final outputs
 ```
 
-## Jupyter Notebook on Cursor Editor
+## Development
+
+### Commit Message
+
+Following commitlint rule: 
+- https://github.com/conventional-changelog/commitlint
+- https://www.conventionalcommits.org/en/v1.0.0/
+
+### Jupyter Notebook on Cursor Editor
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eOSfeBIBzr0?si=MFjxL47thNJGC1SN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
