@@ -103,3 +103,4 @@ Following commitlint rule:
 ### Sample Projects
 
 - https://github.com/Delgan/loguru
+- https://github.com/kotaro-kinoshita/yomitoku
