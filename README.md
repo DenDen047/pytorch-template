@@ -2,14 +2,14 @@
 
 ## Setup
 
-Docker
+### Docker
 ```bash
 $ cd docker && docker compose up -d --build
 $ docker compose down && docker compose up -d --build && docker exec -it [container_name] bash
 ```
 
-uv
-参考: [Pythonパッケージ管理 [uv] 完全入門](https://speakerdeck.com/mickey_kubo/pythonpatukeziguan-li-uv-wan-quan-ru-men)
+### uv
+- 参考: [Pythonパッケージ管理 [uv] 完全入門](https://speakerdeck.com/mickey_kubo/pythonpatukeziguan-li-uv-wan-quan-ru-men)
 ```bash
 $ uv python install 3.11
 
@@ -30,7 +30,7 @@ $ uv export --format=requirements.txt > requirements.txt
 $ deactivate
 ```
 
-venv
+### venv
 ```bash
 $ pyenv install 3.10
 $ pyenv local 3.10
