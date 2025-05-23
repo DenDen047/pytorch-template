@@ -9,16 +9,20 @@ $ docker compose down && docker compose up -d --build && docker exec -it [contai
 ```
 
 uv
+参考: [Pythonパッケージ管理 [uv] 完全入門](https://speakerdeck.com/mickey_kubo/pythonpatukeziguan-li-uv-wan-quan-ru-men)
 ```bash
-$ uv python install 3.12
+$ uv python install 3.11
 
-$ uv python pin 3.12
-$ uv venv .venv
+$ uv python pin 3.11
+$ uv venv --python 3.11
 $ source .venv/bin/activate
 $ uv init
 
 ## uv add numpy ...
 $ uv add ipykernel  # if JupyterLab is used
+
+## run python program
+$ uv run python main.py
 
 $ uv lock
 ## uv sync    # installs everything into .venv
