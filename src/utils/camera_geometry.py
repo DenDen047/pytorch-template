@@ -1,6 +1,10 @@
 import sys
 
-import torch
+import torch  # isort:skip
+
+import matplotlib.cm as cm
+import numpy as np
+import rerun as rr
 from loguru import logger
 
 logger.remove()
@@ -105,31 +109,28 @@ def lidar_to_image_coordinates(
     point_cloud: torch.Tensor,
     intrinsic_mat: torch.Tensor,
     extrinsic_mat: torch.Tensor,
+    depth_type: str = "planar",
     without_batch_dim: bool = False,
 ):
     """
-    Project 3D LiDAR points to 2D image coordinates.
-
-    Parameters
-    ----------
-    point_cloud : torch.Tensor
-        LiDAR point cloud with shape (B, N, 3) or (N, 3) if without_batch_dim is True.
-    intrinsic_mat : torch.Tensor
-        Camera intrinsic matrix with shape (3, 3).
-    extrinsic_mat : torch.Tensor
-        Camera extrinsic matrix with shape (3, 4).
-    without_batch_dim : bool, optional
-        If True, assumes input has no batch dimension and returns output without batch dimension.
-
-    Returns
-    -------
-    torch.Tensor
-        Projected points in image coordinates with shape (B, N, 3) or (N, 3) if without_batch_dim is True.
+    3D LiDAR点群を2D画像座標 (u, v) と深度 (d) に投影する。
     """
-    camera_points = lidar_to_camera_coordinates(
-        point_cloud, intrinsic_mat, extrinsic_mat, without_batch_dim
+    if without_batch_dim:
+        if len(point_cloud.shape) != 2:
+            raise ValueError(
+                f"Invalid point cloud shape for without_batch_dim=True: {point_cloud.shape}"
+            )
+        point_cloud = point_cloud.unsqueeze(0)
+
+    camera_points_3d = lidar_to_camera_3d(point_cloud, extrinsic_mat)
+    image_coords = camera_3d_to_image_coordinates(
+        camera_points_3d, intrinsic_mat, depth_type
     )
-    return camera_to_image_coordinates(camera_points, without_batch_dim)
+
+    if without_batch_dim:
+        image_coords = image_coords.squeeze(0)
+
+    return image_coords
 
 
 def filter_points_in_image_frame(
@@ -451,3 +452,207 @@ def depth_image_to_point_cloud(
     colored_point_cloud = torch.cat([points_world, rgb_colors], dim=1)  # [N, 6]
 
     return colored_point_cloud
+
+
+def lidar_to_camera_3d(
+    point_cloud: torch.Tensor,
+    extrinsic_mat: torch.Tensor,
+) -> torch.Tensor:
+    """
+    LiDAR座標系の3D点群を、カメラ座標系の3D点群に変換する。
+    """
+    if point_cloud.shape[-1] == 3:
+        points_homo = torch.cat(
+            [point_cloud, torch.ones_like(point_cloud[..., :1])], dim=-1
+        )
+    elif point_cloud.shape[-1] == 4:
+        points_homo = point_cloud.clone()
+        points_homo[..., 3] = 1
+    else:
+        raise ValueError(f"Invalid point cloud shape: {point_cloud.shape}")
+
+    camera_points_3d = extrinsic_mat[None, :, :] @ points_homo.transpose(1, 2)
+    return camera_points_3d.transpose(1, 2)
+
+
+def camera_3d_to_image_coordinates(
+    camera_points_3d: torch.Tensor,
+    intrinsic_mat: torch.Tensor,
+    depth_type: str = "planar",
+) -> torch.Tensor:
+    """
+    カメラ座標系の3D点群を、2D画像座標 (u, v) と深度 (d) に投影する。
+    """
+    projected_homo = intrinsic_mat[None, :, :] @ camera_points_3d.transpose(1, 2)
+
+    planar_depth = projected_homo[:, 2:3, :]
+    planar_depth = torch.clamp(planar_depth, min=1e-8)
+
+    u = projected_homo[:, 0:1, :] / planar_depth
+    v = projected_homo[:, 1:2, :] / planar_depth
+    uv_coords = torch.cat([u, v], dim=1).transpose(1, 2)
+
+    if depth_type == "planar":
+        depth = planar_depth.transpose(1, 2)
+    elif depth_type == "radial":
+        depth = torch.linalg.norm(camera_points_3d, ord=2, dim=-1, keepdim=True)
+    else:
+        raise ValueError(
+            f"Invalid depth_type: '{depth_type}'. Must be 'planar' or 'radial'."
+        )
+
+    return torch.cat([uv_coords, depth], dim=-1)
+
+
+# --- Rerunを使った可視化プログラム ---
+
+
+def create_wall_point_cloud(width=50, height=30, z_distance=20, num_points=20000):
+    """カメラのイメージ平面と平行な巨大な壁の点群を生成する"""
+    points = np.random.rand(num_points, 3)
+    points[:, 0] = (points[:, 0] - 0.5) * width  # X座標
+    points[:, 1] = (points[:, 1] - 0.5) * height  # Y座標
+    points[:, 2] = z_distance  # Z座標は固定
+    return points
+
+
+if __name__ == "__main__":
+    # --- Rerunの初期化 ---
+    rr.init("lidar_camera_projection", spawn=True)
+
+    # --- 可視化用データの準備 ---
+    DEVICE = "cpu"
+    IMAGE_WIDTH, IMAGE_HEIGHT = 1280, 720
+
+    # [改善] 巨大な壁の点群を生成
+    logger.info("Creating a giant wall point cloud...")
+    lidar_points_np = create_wall_point_cloud(
+        width=50, height=30, z_distance=20, num_points=20000
+    )
+    lidar_points = torch.from_numpy(lidar_points_np).float().to(DEVICE)
+
+    focal_length = IMAGE_WIDTH / 2
+    intrinsic = torch.tensor(
+        [
+            [focal_length, 0.0, IMAGE_WIDTH / 2],
+            [0.0, focal_length, IMAGE_HEIGHT / 2],
+            [0.0, 0.0, 1.0],
+        ],
+        device=DEVICE,
+    )
+    extrinsic = torch.tensor(
+        [[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0]],
+        device=DEVICE,
+    )
+
+    # --- Rerunへのログ記録 ---
+
+    rr.log("world", rr.ViewCoordinates.RIGHT_HAND_Y_DOWN)
+    rr.log(
+        "world/image",
+        rr.Pinhole(
+            image_from_camera=intrinsic.cpu().numpy(),
+            width=IMAGE_WIDTH,
+            height=IMAGE_HEIGHT,
+        ),
+    )
+
+    z_coords = lidar_points_np[:, 2]
+    colors_3d_normalized = (z_coords - z_coords.min()) / (
+        z_coords.max() - z_coords.min() + 1e-6
+    )
+    colors_3d_rgba = cm.viridis(colors_3d_normalized)
+    rr.log(
+        "world/lidar_points",
+        rr.Points3D(positions=lidar_points_np, colors=colors_3d_rgba),
+    )
+
+    dummy_image = np.zeros((IMAGE_HEIGHT, IMAGE_WIDTH, 3), dtype=np.uint8)
+    rr.log("world/image", rr.Image(dummy_image))
+
+    logger.info("Projecting points and logging to Rerun...")
+
+    # --- 投影計算とログ記録 ---
+    projected_planar_coords = (
+        lidar_to_image_coordinates(
+            lidar_points,
+            intrinsic,
+            extrinsic,
+            depth_type="planar",
+            without_batch_dim=True,
+        )
+        .cpu()
+        .numpy()
+    )
+
+    u, v, d = (
+        projected_planar_coords[:, 0],
+        projected_planar_coords[:, 1],
+        projected_planar_coords[:, 2],
+    )
+    valid_mask = (u >= 0) & (u < IMAGE_WIDTH) & (v >= 0) & (v < IMAGE_HEIGHT) & (d > 0)
+
+    projected_radial_coords = (
+        lidar_to_image_coordinates(
+            lidar_points,
+            intrinsic,
+            extrinsic,
+            depth_type="radial",
+            without_batch_dim=True,
+        )
+        .cpu()
+        .numpy()
+    )
+
+    valid_planar_points = projected_planar_coords[valid_mask]
+    valid_radial_points = projected_radial_coords[valid_mask]
+
+    if len(valid_planar_points) == 0:
+        logger.warning("No valid points found in projection. Exiting.")
+        sys.exit()
+
+    all_valid_depths = np.concatenate(
+        [valid_planar_points[:, 2], valid_radial_points[:, 2]]
+    )
+    global_min_depth, global_max_depth = (
+        np.min(all_valid_depths),
+        np.max(all_valid_depths),
+    )
+    logger.info(
+        f"Global depth range for color normalization: [{global_min_depth:.2f}, {global_max_depth:.2f}]"
+    )
+
+    projection_data = {"planar": valid_planar_points, "radial": valid_radial_points}
+
+    for depth_type, valid_points in projection_data.items():
+        logger.info(
+            f"Logging '{depth_type}' projection with hover-over depth values..."
+        )
+        uv = valid_points[:, :2]
+        depths = valid_points[:, 2]
+
+        # 色の計算
+        norm_depths = (depths - global_min_depth) / (
+            global_max_depth - global_min_depth + 1e-8
+        )
+        colors = cm.viridis(norm_depths)[:, :3] * 255
+
+        # [改善] ホバー時に表示するアノテーションを作成
+        annotations = [
+            rr.AnnotationInfo(id=i, label=f"Depth: {d:.2f}m")
+            for i, d in enumerate(depths)
+        ]
+        class_ids = np.arange(len(depths))
+
+        entity_path = f"world/image/{depth_type}_projection"
+        rr.log(entity_path, rr.AnnotationContext(annotations))
+        rr.log(
+            entity_path,
+            rr.Points2D(positions=uv, colors=colors, radii=2, class_ids=class_ids),
+        )
+
+    logger.info("Done. Check the Rerun viewer.")
+    logger.info("--> Hover over points in the 2D view to see their depth values.")
+    logger.info(
+        "--> Note the color difference between 'planar' (uniform) and 'radial' (gradient)."
+    )
