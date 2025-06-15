@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+For Cursor IDE users, also see `.cursor/rules` files for additional development guidelines.
+
 ## 🔨 Most Important Rule - Process for Adding New Rules
 
 When receiving instructions from the user that are deemed necessary to be followed consistently, not just for a single instance:
