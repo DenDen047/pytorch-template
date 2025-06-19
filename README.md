@@ -108,3 +108,9 @@ Following commitlint rule:
 
 - https://github.com/Delgan/loguru
 - https://github.com/kotaro-kinoshita/yomitoku
+
+### Claude Code
+
+- [Claude Code どこまでも](https://speakerdeck.com/nwiizo/claude-everywhere)
+- [Claude Code の settings.json は設定した方がいい](https://syu-m-5151.hatenablog.com/entry/2025/06/05/134147)
+- [Claude Code の CLAUDE.mdは設定した方がいい](https://syu-m-5151.hatenablog.com/entry/2025/06/06/190847)
