@@ -100,6 +100,7 @@ Following commitlint rule:
 ## Useful Tools
 
 - [SAM2 Colab Notebook](https://colab.research.google.com/drive/1q-_LLIBZ-WW64VRzJ9fSVYDBOvADvWkW?usp=sharing)
+- [MoGe Colab Notebook](https://colab.research.google.com/drive/1reb8Hn_0N7N3i1LgXbMhm7LkaDcA4CKj?usp=sharing&authuser=1#scrollTo=tTDZf8kR7_nV)
 
 ## Reference
 
