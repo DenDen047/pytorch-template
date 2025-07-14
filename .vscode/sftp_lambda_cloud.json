@@ -1,0 +1,21 @@
+{
+    "name": "lambda_cloud",
+    "host": "IP_ADDRESS", // TODO: replace with your own ip address
+    "protocol": "sftp",
+    "port": 22,
+    "username": "ubuntu",
+    "privateKeyPath": "~/.ssh/lambda_cloud",
+    "remotePath": "/home/ubuntu/WORKDIR", // TODO: replace with your own remote path
+    "uploadOnSave": true,
+    "ignore": [
+        ".vscode",
+        ".gitignore",
+        "*.pyc",
+        "*.log",
+        "*.pth",
+        "*.pt",
+        "__pycache__",
+        "*.pyo",
+        "*.pyd"
+    ]
+}
