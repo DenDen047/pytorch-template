@@ -49,6 +49,13 @@ $ deactivate
 ref: https://lambda.ai/blog/set-up-a-tensorflow-gpu-docker-container-using-lambda-stack-dockerfile
 
 ```bash
+sudo apt update && sudo apt upgrade -y
+
+# Guest agent of Lambda Cloud
+curl -L https://lambdalabs-guest-agent.s3.us-west-2.amazonaws.com/scripts/install.sh | sudo bash
+sudo systemctl --no-pager status lambda-guest-agent*
+
+# nvidia docker
 LAMBDA_REPO=$(mktemp) && \
 	wget -O${LAMBDA_REPO} https://lambdalabs.com/static/misc/lambda-stack-repo.deb && \
 	sudo dpkg -i ${LAMBDA_REPO} && rm -f ${LAMBDA_REPO} && \
@@ -63,7 +70,6 @@ sudo apt-get install -y \
     libnvidia-container1=${NVIDIA_CONTAINER_TOOLKIT_VERSION}
 sudo nvidia-ctk runtime configure --runtime=docker
 sudo systemctl restart docker
-
 sudo usermod -aG docker $USER
 docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
 ```
