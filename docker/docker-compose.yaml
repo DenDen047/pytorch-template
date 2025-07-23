@@ -19,7 +19,7 @@ services:
         - GID=1001
         - USER_NAME=naoya
         - GROUP_NAME=naoya
-        - TORCH_CUDA_ARCH_LIST=7.5
+        - TORCH_CUDA_ARCH_LIST=7.5,8.6
       context: ./
       dockerfile: Dockerfile
     tty: true
