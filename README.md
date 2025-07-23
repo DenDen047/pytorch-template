@@ -49,29 +49,10 @@ $ deactivate
 ref: https://lambda.ai/blog/set-up-a-tensorflow-gpu-docker-container-using-lambda-stack-dockerfile
 
 ```bash
-sudo apt update && sudo apt upgrade -y
+curl -fsSL https://raw.githubusercontent.com/DenDen047/dotfiles/refs/heads/master/setup_scripts/lambda_cloud1.sh | bash
 
-# Guest agent of Lambda Cloud
-curl -L https://lambdalabs-guest-agent.s3.us-west-2.amazonaws.com/scripts/install.sh | sudo bash
-sudo systemctl --no-pager status lambda-guest-agent*
-
-# nvidia docker
-sudo usermod -aG docker $USER
-LAMBDA_REPO=$(mktemp) && \
-	wget -O${LAMBDA_REPO} https://lambdalabs.com/static/misc/lambda-stack-repo.deb && \
-	sudo dpkg -i ${LAMBDA_REPO} && rm -f ${LAMBDA_REPO} && \
-	sudo apt-get update && sudo apt-get install -y lambda-stack-cuda
-sudo reboot
-sudo apt-get update
-export NVIDIA_CONTAINER_TOOLKIT_VERSION=1.17.8-1
-sudo apt-get install -y \
-    nvidia-container-toolkit=${NVIDIA_CONTAINER_TOOLKIT_VERSION} \
-    nvidia-container-toolkit-base=${NVIDIA_CONTAINER_TOOLKIT_VERSION} \
-    libnvidia-container-tools=${NVIDIA_CONTAINER_TOOLKIT_VERSION} \
-    libnvidia-container1=${NVIDIA_CONTAINER_TOOLKIT_VERSION}
-sudo nvidia-ctk runtime configure --runtime=docker
-sudo systemctl restart docker
-docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
+# after reboot, run the following command
+curl -fsSL https://raw.githubusercontent.com/DenDen047/dotfiles/refs/heads/master/setup_scripts/lambda_cloud2.sh | bash
 ```
 
 ## Usage
