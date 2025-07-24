@@ -6,6 +6,7 @@
             "name": "Python Debugger: Current File",
             "type": "debugpy",
             "request": "launch",
+            "python": "${workspaceFolder}/.venv/bin/python",
             "program": "${file}",
             "console": "integratedTerminal"
         },
@@ -13,6 +14,7 @@
             "name": "Visualize RGB-D with Rerun",
             "type": "debugpy",
             "request": "launch",
+            "python": "${workspaceFolder}/.venv/bin/python",
             "program": "${workspaceFolder}/tools/rerun_rgbd_visualization.py",
             "console": "integratedTerminal",
             "args": [
