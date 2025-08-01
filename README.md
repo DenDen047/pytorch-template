@@ -9,10 +9,7 @@ $ docker compose down && docker compose up -d --build && docker exec -it [contai
 ```
 
 ### uv
-- 参考: [Pythonパッケージ管理 [uv] 完全入門](https://speakerdeck.com/mickey_kubo/pythonpatukeziguan-li-uv-wan-quan-ru-men)
 ```bash
-$ uv python install 3.11
-
 $ uv python pin 3.11
 $ uv venv --python 3.11
 $ source .venv/bin/activate
@@ -29,6 +26,10 @@ $ uv lock
 $ uv export --format=requirements.txt > requirements.txt
 $ deactivate
 ```
+
+ref:
+- [Pythonパッケージ管理 [uv] 完全入門](https://speakerdeck.com/mickey_kubo/pythonpatukeziguan-li-uv-wan-quan-ru-men)
+- [uvでパッケージ管理をしよう！〜初心者でも分かる！〜仮想環境を簡単に構築](https://youtu.be/VgH1GKSCXJQ?si=B-o0UPSoZjrfkHTY)
 
 ### venv
 ```bash
