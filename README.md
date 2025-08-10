@@ -50,6 +50,10 @@ $ deactivate
 ref: https://lambda.ai/blog/set-up-a-tensorflow-gpu-docker-container-using-lambda-stack-dockerfile
 
 ```bash
+ssh ubuntu@IP_ADDRESS -i ~/.ssh/lambda_cloud
+```
+
+```bash
 curl -fsSL https://raw.githubusercontent.com/DenDen047/dotfiles/refs/heads/master/setup_scripts/lambda_cloud1.sh | bash
 
 # after reboot, run the following command
