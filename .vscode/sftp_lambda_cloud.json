@@ -16,6 +16,7 @@
         "*.pt",
         "__pycache__",
         "*.pyo",
-        "*.pyd"
+        "*.pyd",
+        ".DS_Store"
     ]
 }
