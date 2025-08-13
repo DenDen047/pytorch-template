@@ -22,6 +22,7 @@ services:
         - TORCH_CUDA_ARCH_LIST=7.5,8.6
       context: ./
       dockerfile: Dockerfile
+    shm_size: "16g"
     tty: true
     volumes:
       - ../:/home/naoya/project
