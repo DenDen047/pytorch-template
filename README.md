@@ -31,20 +31,6 @@ ref:
 - [Pythonパッケージ管理 [uv] 完全入門](https://speakerdeck.com/mickey_kubo/pythonpatukeziguan-li-uv-wan-quan-ru-men)
 - [uvでパッケージ管理をしよう！〜初心者でも分かる！〜仮想環境を簡単に構築](https://youtu.be/VgH1GKSCXJQ?si=B-o0UPSoZjrfkHTY)
 
-### venv
-```bash
-$ pyenv install 3.10
-$ pyenv local 3.10
-$ python -m venv .venv
-$ source .venv/bin/activate
-$ pip install -U pip
-
-## pip install ...
-
-$ pip freeze > requirements.txt
-$ deactivate
-```
-
 ### Lambda Cloud
 
 ref: https://lambda.ai/blog/set-up-a-tensorflow-gpu-docker-container-using-lambda-stack-dockerfile
@@ -105,7 +91,7 @@ This project follows `git-flow`.
 
 ### Commit Message
 
-Following commitlint rule: 
+Following commitlint rule:
 - https://github.com/conventional-changelog/commitlint
 - https://www.conventionalcommits.org/en/v1.0.0/
 

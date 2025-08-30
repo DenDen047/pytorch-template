@@ -14,17 +14,17 @@ services:
         - BASE_IMAGE=nvidia/cuda:12.1.0-devel-ubuntu20.04
         - PYTHON_VERSION=3.11
         - FORCE_CUDA=1
-        - UID=1001
-        - GID=1001
-        - USER_NAME=naoya
-        - GROUP_NAME=naoya
+        - UID=1000
+        - GID=1000
+        - USER_NAME=ubuntu
+        - GROUP_NAME=ubuntu
         - TORCH_CUDA_ARCH_LIST=7.5,8.6
       context: ./
       dockerfile: Dockerfile
     shm_size: "16gb"
     tty: true
     volumes:
-      - ../:/home/naoya/project
-      - /data/naoya/:/data/
+      - ../:/home/ubuntu/project
+      # - /data/naoya/:/data/
     # ports:
     #   - 8000:8000

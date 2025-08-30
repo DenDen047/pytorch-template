@@ -2,11 +2,11 @@ ARG BASE_IMAGE=ubuntu:20.04
 FROM ${BASE_IMAGE}
 
 ARG PROJECT_NAME=project
-ARG USER_NAME=challenger
-ARG GROUP_NAME=challengers
+ARG USER_NAME=ubuntu
+ARG GROUP_NAME=ubuntu
 ARG UID=1000
 ARG GID=1000
-ARG PYTHON_VERSION=3.8
+ARG PYTHON_VERSION=3.11
 ARG APPLICATION_DIRECTORY=/home/${USER_NAME}/${PROJECT_NAME}
 ARG RUN_POETRY_INSTALL_AT_BUILD_TIME="false"
 ARG FORCE_CUDA=0
@@ -48,12 +48,6 @@ RUN python3 -m pip install tensorboard
 
 # pytorch (https://pytorch.org/get-started/previous-versions/)
 RUN python3 -m pip install torch torchvision
-
-# # If ${RUN_POETRY_INSTALL_AT_BUILD_TIME} = "true", install Python package by Poetry and move .venv under ${HOME}.
-# # This process is for CI (GitHub Actions). To prevent overwrite by volume of docker compose, .venv is moved under ${HOME}.
-# COPY --chown=${UID}:${GID} pyproject.toml poetry.lock poetry.toml .
-# RUN test ${RUN_POETRY_INSTALL_AT_BUILD_TIME} = "true" && poetry install || echo "skip to run poetry install."
-# RUN test ${RUN_POETRY_INSTALL_AT_BUILD_TIME} = "true" && mv ${APPLICATION_DIRECTORY}/.venv ${HOME}/.venv || echo "skip to move .venv."
 
 # Clean
 RUN apt-get clean \
