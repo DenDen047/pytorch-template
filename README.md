@@ -15,8 +15,8 @@ $ uv venv --python 3.11
 $ source .venv/bin/activate
 $ uv init
 
-## uv add numpy ...
-$ uv add ipykernel  # if JupyterLab is used
+## uv add ...
+$ uv add ruff
 
 ## run python program
 $ uv run python main.py
@@ -31,6 +31,8 @@ ref:
 - [Pythonパッケージ管理 [uv] 完全入門](https://speakerdeck.com/mickey_kubo/pythonpatukeziguan-li-uv-wan-quan-ru-men)
 - [uvでパッケージ管理をしよう！〜初心者でも分かる！〜仮想環境を簡単に構築](https://youtu.be/VgH1GKSCXJQ?si=B-o0UPSoZjrfkHTY)
 
+## GPU Cloud Setup
+
 ### Lambda Cloud
 
 ref: https://lambda.ai/blog/set-up-a-tensorflow-gpu-docker-container-using-lambda-stack-dockerfile
@@ -44,6 +46,15 @@ curl -fsSL https://raw.githubusercontent.com/DenDen047/dotfiles/refs/heads/maste
 
 # after reboot, run the following command
 curl -fsSL https://raw.githubusercontent.com/DenDen047/dotfiles/refs/heads/master/setup_scripts/lambda_cloud2.sh | bash
+```
+
+### Modal
+
+ref: https://modal.com/docs/guide
+
+```bash
+modal setup
+modal run src/modal_sample.py
 ```
 
 ## Usage
