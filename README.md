@@ -114,17 +114,22 @@ Following commitlint rule:
 
 - colormap: `turbo`
 
-### Naming Conventions for Rotation Matrices
+### Naming Conventions for Rotation / Transformation Matrices
 
-To avoid confusion between **active** and **passive** interpretations of rotation/transformation matrices, we adopt the following naming rules:
+To avoid confusion, we distinguish between **active** and **passive** interpretations:
 
-- **Active rotation (rotating points/vectors):**
-  - `R_active`, `R_apply`, or `R_obj`
-  - Example: applying a rotation to a point cloud.
+- **Active rotation / transformation**  
+  - Variables: `R_active`, `R_apply`, `R_obj`, `T_active`  
+  - Meaning: Actively rotating points or vectors (e.g., applying to a point cloud).
 
-- **Passive rotation (coordinate frame transformation / pose):**
-  - `R_world_to_cam`, `R_frame`, or `R_pose`
-  - Example: extrinsic parameters of a camera (world → camera coordinates).
+- **Passive rotation / transformation**  
+  - Variables: `R_world_to_cam`, `R_frame`, `R_pose`, `T_world_to_cam`  
+  - Meaning: Changing the coordinate frame (e.g., camera extrinsics).
+
+- **Other common conventions**  
+  - `R_ext`, `T_ext`: Extrinsic parameters (world → camera transformation).  
+  - `R_int`, `K`: Intrinsic parameters (camera matrix).  
+  - `R_wc`, `R_cw`: Shorthand for `R_world_to_cam`, `R_cam_to_world`.
 
 ## Useful Tools
 
