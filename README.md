@@ -115,6 +115,7 @@ Following commitlint rule:
 - colormap: `turbo`
 
 ### Naming Conventions for Rotation / Transformation Matrices
+ref: https://en.wikipedia.org/wiki/Active_and_passive_transformation
 
 To avoid confusion, we distinguish between **active** and **passive** interpretations:
 
@@ -131,7 +132,17 @@ To avoid confusion, we distinguish between **active** and **passive** interpreta
   - `R_int`, `K`: Intrinsic parameters (camera matrix).  
   - `R_wc`, `R_cw`: Shorthand for `R_world_to_cam`, `R_cam_to_world`.
 
-ref: https://en.wikipedia.org/wiki/Active_and_passive_transformation
+### Conversion between Active and Passive
+
+- **Rotation matrices**  
+  - `R_passive = R_active.T`  
+  - `R_active = R_passive.T`
+
+- **Transformation matrices (SE(3))**  
+  - `T_passive = T_active^-1`  
+  - `T_active = T_passive^-1`
+
+This ensures consistent handling of both interpretations.
 
 ## Useful Tools
 
