@@ -114,6 +114,18 @@ Following commitlint rule:
 
 - colormap: `turbo`
 
+### Naming Conventions for Rotation Matrices
+
+To avoid confusion between **active** and **passive** interpretations of rotation/transformation matrices, we adopt the following naming rules:
+
+- **Active rotation (rotating points/vectors):**
+  - `R_active`, `R_apply`, or `R_obj`
+  - Example: applying a rotation to a point cloud.
+
+- **Passive rotation (coordinate frame transformation / pose):**
+  - `R_world_to_cam`, `R_frame`, or `R_pose`
+  - Example: extrinsic parameters of a camera (world → camera coordinates).
+
 ## Useful Tools
 
 - [SAM2 Colab Notebook](https://colab.research.google.com/drive/1q-_LLIBZ-WW64VRzJ9fSVYDBOvADvWkW?usp=sharing)
