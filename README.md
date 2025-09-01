@@ -131,6 +131,8 @@ To avoid confusion, we distinguish between **active** and **passive** interpreta
   - `R_int`, `K`: Intrinsic parameters (camera matrix).  
   - `R_wc`, `R_cw`: Shorthand for `R_world_to_cam`, `R_cam_to_world`.
 
+ref: https://en.wikipedia.org/wiki/Active_and_passive_transformation
+
 ## Useful Tools
 
 - [SAM2 Colab Notebook](https://colab.research.google.com/drive/1q-_LLIBZ-WW64VRzJ9fSVYDBOvADvWkW?usp=sharing)
