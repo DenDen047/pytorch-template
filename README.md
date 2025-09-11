@@ -43,6 +43,8 @@ ssh ubuntu@IP_ADDRESS -i ~/.ssh/lambda_cloud
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/DenDen047/dotfiles/refs/heads/master/setup_scripts/lambda_cloud1.sh | bash
+# if failed in the last step
+sudo apt-get update && sudo apt-get install -y lambda-stack-cuda && sudo reboot
 
 # after reboot, run the following command
 curl -fsSL https://raw.githubusercontent.com/DenDen047/dotfiles/refs/heads/master/setup_scripts/lambda_cloud2.sh | bash
