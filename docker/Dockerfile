@@ -10,7 +10,7 @@ ARG PYTHON_VERSION=3.11
 ARG APPLICATION_DIRECTORY=/home/${USER_NAME}/${PROJECT_NAME}
 ARG RUN_POETRY_INSTALL_AT_BUILD_TIME="false"
 ARG FORCE_CUDA=0
-# https://en.wikipedia.org/wiki/CUDA#GPUs_supported
+# https://developer.nvidia.com/cuda-gpus
 ARG TORCH_CUDA_ARCH_LIST=7.5
 
 ENV DEBIAN_FRONTEND="noninteractive" \
