@@ -1,13 +1,8 @@
 services:
   project-core:
     container_name: project-core
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              capabilities: [gpu]
-              count: all
+    deploy: {}
+    runtime: nvidia
     image: denden047/project-core
     build:
       args:
