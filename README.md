@@ -13,7 +13,8 @@ $ docker compose down && docker compose up -d --build && docker exec -it [contai
 $ uv python pin 3.11
 $ uv venv --python 3.11
 $ source .venv/bin/activate
-$ uv init
+## uv init
+$ uv sync
 
 ## uv add ...
 $ uv add ruff
