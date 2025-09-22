@@ -13,8 +13,7 @@ $ docker compose down && docker compose up -d --build && docker exec -it [contai
 $ uv python pin 3.11
 $ uv venv --python 3.11
 $ source .venv/bin/activate
-## uv init
-$ uv sync
+$ uv init
 
 ## uv add ...
 $ uv add ruff
@@ -26,6 +25,13 @@ $ uv lock
 ## uv sync    # installs everything into .venv
 $ uv export --format=requirements.txt > requirements.txt
 $ deactivate
+```
+
+or
+
+```
+## copy pyproject.toml and uv.lock
+$ uv sync
 ```
 
 ref:
