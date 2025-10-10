@@ -1,4 +1,4 @@
-FROM nvidia/cuda:cuda:12.8.1-cudnn-devel-ubuntu22.04
+FROM nvidia/cuda:12.8.1-cudnn-devel-ubuntu22.04
 
 # environment variables
 ENV PIPENV_PYTHON_VERSION=3.11
@@ -18,33 +18,36 @@ ENV CUDA_VERSION=cu128
 
 # basic libs
 RUN apt update \
-  && apt install -y software-properties-common \
-  && add-apt-repository ppa:deadsnakes/ppa \
-  && apt update \
-  && apt install -y \
-    vim sudo zip unzip wget git curl g++ \
-    build-essential \
-    git-flow \
-    gfortran pkg-config ffmpeg exiftool locales-all libopencv-dev \
-  python${PIPENV_PYTHON_VERSION} \
-  python${PIPENV_PYTHON_VERSION}-dev \
-  python${PIPENV_PYTHON_VERSION}-distutils \
-  && rm /usr/bin/python3 \
-  && ln -s /usr/bin/python${PIPENV_PYTHON_VERSION} /usr/bin/python3 \
-  && ln -s /usr/bin/python3 /usr/bin/python \
-  && curl -sS https://bootstrap.pypa.io/get-pip.py | python3 \
-  && adduser --disabled-password --gecos '' $USER_NAME \
-  && adduser $USER_NAME sudo \
-  && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+    && apt install -y software-properties-common \
+    && add-apt-repository ppa:deadsnakes/ppa \
+    && apt update \
+    && apt install -y \
+        vim sudo zip unzip wget git curl g++ \
+        build-essential \
+        git-flow \
+        gfortran pkg-config ffmpeg exiftool locales-all libopencv-dev \
+        python${PIPENV_PYTHON_VERSION} \
+        python${PIPENV_PYTHON_VERSION}-dev \
+        python${PIPENV_PYTHON_VERSION}-distutils \
+    && rm /usr/bin/python3 \
+    && ln -s /usr/bin/python${PIPENV_PYTHON_VERSION} /usr/bin/python3 \
+    && ln -s /usr/bin/python3 /usr/bin/python \
+    && curl -sS https://bootstrap.pypa.io/get-pip.py | python3 \
+    && adduser --disabled-password --gecos '' $USER_NAME \
+    && adduser $USER_NAME sudo \
+    && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 COPY ./entrypoint.sh /home/$USER_NAME
 
 # pip libs
 RUN python3 -m pip install -U pip
-RUN python3 -m pip install scikit-image matplotlib imageio opencv-python
-RUN python3 -m pip install plotly pandas
-RUN python3 -m pip install tqdm
-RUN python3 -m pip install loguru
-RUN python3 -m pip install tensorboard
+RUN python3 -m pip install \
+    scikit-image matplotlib imageio opencv-python \
+    plotly \
+    pandas \
+    tqdm \
+    loguru \
+    tensorboard \
+    ipython ipykernel
 
 # PyTorch
 RUN python3 -m pip install torch==${TORCH_VERSION}+${CUDA_VERSION} torchvision --index-url https://download.pytorch.org/whl/${CUDA_VERSION}
