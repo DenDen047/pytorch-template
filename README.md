@@ -57,6 +57,8 @@ sudo apt-get update && sudo apt-get install -y lambda-stack-cuda && sudo reboot
 curl -fsSL https://raw.githubusercontent.com/DenDen047/dotfiles/refs/heads/master/setup_scripts/lambda_cloud2.sh | bash
 ```
 
+You can easily upload files to the cloud using the [FTP/SFTP/SSH Sync Tool](https://marketplace.visualstudio.com/items?itemName=oorzc.ssh-tools) extension.
+
 ### Modal
 
 ref: https://modal.com/docs/guide
@@ -128,27 +130,27 @@ ref: https://en.wikipedia.org/wiki/Active_and_passive_transformation
 
 To avoid confusion, we distinguish between **active** and **passive** interpretations:
 
-- **Active rotation / transformation**  
-  - Variables: `R_active`, `R_apply`, `R_obj`, `T_active`  
+- **Active rotation / transformation**
+  - Variables: `R_active`, `R_apply`, `R_obj`, `T_active`
   - Meaning: Actively rotating points or vectors (e.g., applying to a point cloud).
 
-- **Passive rotation / transformation**  
-  - Variables: `R_world_to_cam`, `R_frame`, `R_pose`, `T_world_to_cam`  
+- **Passive rotation / transformation**
+  - Variables: `R_world_to_cam`, `R_frame`, `R_pose`, `T_world_to_cam`
   - Meaning: Changing the coordinate frame (e.g., camera extrinsics).
 
-- **Other common conventions**  
-  - `R_ext`, `T_ext`: Extrinsic parameters (world → camera transformation).  
-  - `R_int`, `K`: Intrinsic parameters (camera matrix).  
+- **Other common conventions**
+  - `R_ext`, `T_ext`: Extrinsic parameters (world → camera transformation).
+  - `R_int`, `K`: Intrinsic parameters (camera matrix).
   - `R_wc`, `R_cw`: Shorthand for `R_world_to_cam`, `R_cam_to_world`.
 
 ### Conversion between Active and Passive
 
-- **Rotation matrices**  
-  - `R_passive = R_active.T`  
+- **Rotation matrices**
+  - `R_passive = R_active.T`
   - `R_active = R_passive.T`
 
-- **Transformation matrices (SE(3))**  
-  - `T_passive = T_active^-1`  
+- **Transformation matrices (SE(3))**
+  - `T_passive = T_active^-1`
   - `T_active = T_passive^-1`
 
 This ensures consistent handling of both interpretations.

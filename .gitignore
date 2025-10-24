@@ -231,3 +231,5 @@ pyrightconfig.json
 data/*
 !data/README.md
 output/*
+
+sync_config.jsonc

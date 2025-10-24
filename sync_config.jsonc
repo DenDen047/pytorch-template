@@ -1,7 +1,7 @@
 {
 	"lambda_cloud": {
 		"type": "sftp",
-		"host": "163.192.49.17",
+		"host": "IP_ADDRESS",
 		"port": 22,
 		"username": "ubuntu",
 		"privateKeyPath": "/Users/ikuta/.ssh/lambda_cloud",
@@ -18,7 +18,7 @@
 		"deleteRemote": false,
 		"upload_to_root": false,
 		"distPath": [],
-		"remotePath": "/home/ubuntu/uSonar-Gemma3",
+		"remotePath": "/lambda/nfs/PROJECT_FOLDER/",
 		"excludePath": [
 			".vscode",
 			".gitignore",
@@ -58,7 +58,7 @@
 	//     "upload_to_root": false, // If distPath configuration directory has only one, upload to the root directory of remotePath, generally used for deploying front-end code, default is false
 	//     "deleteRemote": false, // Whether to delete the remote distPath configuration directory before uploading, generally used for cleaning up front-end deployment code, default is false
 	//     "distPath": [], // (Optional) Local directory to upload, supports string or array, default is to upload the root directory
-	//     "remotePath": "/www/wwwroot/test", // (sftp, ssh configuration) Upload server address
+	//     "remotePath": "/www/wwwroot/test", // (sftp, ssh configuration) Upload server address. Cannot specify symbolic links.
 	//     "excludePath": [], // (Optional) Files and directories to exclude from upload in the current environment, will be merged with the plugin configuration excludePath, when the plugin configuration uses gitignore, it will be merged with the .gitignore configuration file
 	//     "downloadPath": "", //  (Optional) Download path, default is the current project root directory, used for manually downloading files or folders, can specify the download address
 	//     "downloadExcludePath": [],//  (Optional) Files and directories to exclude from download
