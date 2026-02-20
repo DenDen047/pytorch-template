@@ -29,7 +29,7 @@ $ deactivate
 
 or
 
-```
+```bash
 ## copy pyproject.toml and uv.lock
 $ uv sync
 ```
@@ -80,6 +80,7 @@ modal run src/modal_sample.py
 ├── notebooks/           # JupyterLabでの実験ノート
 ├── pyproject.toml       # Pythonプロジェクトの主要設定ファイル (PEP 518準拠)
 ├── setup.cfg            # pyproject.toml未対応の設定を補完
+├── spec/                # 仕様書やドキュメント
 └── src/                 # Pythonパッケージコード (共通処理の関数やクラスなど)
 ```
 
