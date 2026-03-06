@@ -233,3 +233,4 @@ data/*
 output/*
 
 sync_config.jsonc
+AI_INSTRUCTIONS.md
