@@ -9,6 +9,9 @@
 uv add <package>            # Install a new dependency
 uv sync                     # Install all dependencies from lockfile
 
+# Python commands
+uv run python <file>      # Run a Python file
+
 # Lint
 ruff check .
 ```
