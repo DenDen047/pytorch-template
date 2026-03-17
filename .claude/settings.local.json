@@ -15,7 +15,7 @@
       "Bash(uv pip list:*)",
       "Bash(uv sync:*)",
       "Bash(grep:*)",
-      "mcp__deepwiki__ask_question",,
+      "mcp__deepwiki__ask_question",
       "mcp__deepwiki__read_wiki_structure",
       "mcp__deepwiki__read_wiki_contents",
       "mcp__arxiv-mcp-server__search_papers",
