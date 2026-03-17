@@ -74,3 +74,9 @@ When running shell commands via the Bash tool, always prefer modern alternatives
 |--------|--------|-------|
 | `find` | `fd` | simpler, faster and user-friendly |
 | `grep` | `rg` (ripgrep) | ripgrep is a line-oriented search tool that recursively searches the current directory for a regex pattern. By default, ripgrep will respect gitignore rules and automatically skip hidden files/directories and binary files.  |
+
+## Test Generation Guardrails
+- A file named as a test must be executable by `pytest` (`test_` functions + explicit `assert`).
+- Never treat API errors as pass (`print` + `continue` is prohibited in tests); fail fast with assertions.
+- Tests must return non-zero on failure so CI can detect regressions.
+- "Visual/manual verification scripts" are allowed only as auxiliary tools, not as the primary pass/fail test.
