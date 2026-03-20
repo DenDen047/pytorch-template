@@ -176,6 +176,6 @@ This ensures consistent handling of both interpretations.
 
 ### Claude Code
 
-- [Claude Code どこまでも](https://speakerdeck.com/nwiizo/claude-everywhere)
+- [Claude Code / Codex ユーザーのための誰でもわかるHarness Engineeringベストプラクティス](https://nyosegawa.com/posts/harness-engineering-best-practices-2026/)
 - [Claude Code の settings.json は設定した方がいい](https://syu-m-5151.hatenablog.com/entry/2025/06/05/134147)
 - [Claude Code の CLAUDE.mdは設定した方がいい](https://syu-m-5151.hatenablog.com/entry/2025/06/06/190847)
