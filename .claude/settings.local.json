@@ -24,7 +24,15 @@
       "WebFetch(domain:raw.githubusercontent.com)",
       "WebFetch(domain:github.com)",
       "mcp__hugging-face__hub_repo_details",
-      "WebSearch"
+      "mcp__zotero__zotero_semantic_search",
+      "WebSearch",
+      "WebFetch(domain:arxiv.org)",
+      "WebFetch(domain:www.biorxiv.org)",
+      "WebFetch(domain:*.wikipedia.org)",
+      "WebFetch(domain:wires.onlinelibrary.wiley.com)",
+      "WebFetch(domain:www.semanticscholar.org)",
+      "WebFetch(domain:*.gov)",
+      "WebFetch(domain:*.edu)"
     ]
   }
 }
