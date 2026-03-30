@@ -104,13 +104,56 @@ data/
 
 ### Git Workflow
 
-This project follows `git-flow`.
+This project follows **GitHub Flow + Git Worktree**, optimized for AI agent collaboration.
 
-1.  **Starting Work:** Begin new development or experiments by creating a branch off of the `develop` branch.
-2.  **Merging to `develop`:** Once work intended for `develop` is complete, merge it into the `develop` branch (creating a Pull Request on GitHub is recommended if applicable) and delete the original branch.
-3.  **Keeping History (Archiving):** If you wish to keep the code and history of a branch *without* merging it into `develop` (e.g., failed experiments, pure explorations), rename the branch to `archive/<original-branch-name>`.
-    * Example: To archive a branch named `exp/try-hyperparams-v1`, rename it to `archive/exp/try-hyperparams-v1`.
-4.  **Archived Branches:** Branches prefixed with `archive/` are kept for reference only and must *not* be merged into active branches like `develop` or `main`.
+```
+main (always deployable)
+ ├── feat/add-loss-function        ← short-lived feature branch
+ ├── claude/refactor-trainer-a1b2  ← AI agent branch (via worktree)
+ └── archive/exp/try-hyperparams-v1  ← preserved for reference only
+```
+
+1. **`main`** is the single long-lived branch. It must always be in a working state.
+2. All work happens on **short-lived branches** from `main` → merged via **Pull Request** → branch deleted.
+3. **Archiving:** To keep a branch without merging (failed experiments, etc.), rename it to `archive/<original-name>`. Archived branches must not be merged into `main`.
+
+#### Working with AI Agents (Worktree)
+
+[Git Worktree](https://git-scm.com/docs/git-worktree) gives each AI agent an isolated working directory, so you and multiple agents can work in parallel without conflicts.
+
+```bash
+# You work normally in the repo
+git switch -c feat/my-feature
+
+# In another terminal, launch an AI agent in its own worktree
+claude --worktree feat/add-augmentation
+# → creates .claude/worktrees/feat/add-augmentation/ (isolated from your work)
+
+# Run another agent in parallel — no conflicts
+claude --worktree fix/normalize-bug
+```
+
+When the agent finishes: changes → keep worktree, push, create PR. No changes → auto-cleaned.
+
+**One-time setup:**
+
+```bash
+# .gitignore
+.claude/worktrees/
+
+# .worktreeinclude — auto-copy these gitignored files to new worktrees
+.env
+.env.local
+conf/local/**
+```
+
+#### Quick Reference
+
+```
+Human:  main ── feat/xxx ──→ PR ──→ merge ──→ delete branch
+Agent:  main ── [worktree] claude/xxx ──→ PR ──→ merge ──→ auto-clean
+Keep:   any branch ──→ archive/branch-name (read-only, never merge)
+```
 
 ### Commit Message
 
